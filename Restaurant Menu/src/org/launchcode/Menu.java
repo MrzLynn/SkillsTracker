@@ -28,4 +28,12 @@ public class Menu {
     public ArrayList<MenuItem> getItems() {
         return items;
     }
+    public void printMenu(MenuItem item){
+        for(int i = 0; i< items.size();i++){
+            System.out.println(items.get(i).getDescription());
+            System.out.println(items.get(i).getPrice());
+        }
+    }
+
 }
+
