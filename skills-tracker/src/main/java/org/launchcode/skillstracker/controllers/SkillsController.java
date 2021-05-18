@@ -1,49 +1,60 @@
 package org.launchcode.skillstracker.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class SkillsController {
+    @RequestMapping(value = "")
+    @ResponseBody
+    public String startSkills() {
+        String html = "<h1 = 'Skills Tacker'>" +
+                "<h2 = 'We have a few skills we would like to learn'>" +
+                "<ol>" +
+                "<li>Java</li>" +
+                "<li>JavaScript</li>" +
+                "<li>Python</li>" +
+                "</ol>";
+        return html;
+    }
 
-    @RequestMapping(value = "hello", method = RequestMethod.GET)
-    public String helloForm(){
+    @GetMapping(value = "form")
+    @ResponseBody
+    public String formSkills() {
         String html =
                 "<form method = 'POST'>" +
-                        "<h1 = 'Skills Tacker'>" +
-                        "<h2 = 'We have a few skills we would like to learn'>" +
                         "<input type = 'text' name = 'name'>" +
-                        "<select name = 'My favorite language'>" +
-                        "<select name2 = 'My second favorite language'>" +
-                        "<select name3 = 'My third favorite language'>" +
-                        "<ol = 'english' English</ol>" +
-                        "<ol = 'spanish' Spanish</ol>" +
-                        "<ol = 'italian' Italian</ol>" +
+                        "<select name = 'firstChoice'>" +
+                        "<option value = 'java' Java</option>" +
+                        "<option value = 'javaScript' JavaScript</option>" +
+                        "<option value = 'python' Python</option>" +
+                        "<select name = 'secondChoice'>" +
+                        "<option value = 'java' Java</option>" +
+                        "<option value = 'javaScript' JavaScript</option>" +
+                        "<option value = 'python' Python</option>" +
+                        "<select name = 'thirdChoice'>" +
+                        "<option value = 'java' Java</option>" +
+                        "<option value = 'javaScript' JavaScript</option>" +
+                        "<option value = 'python' Python</option>" +
                         "<select>" +
-                        "<input type = 'submit' value='Submit'>" +
-                        "</h1>" +
-                        "</h2>" +
+                        "<input type = 'submit' value='Submit' />" +
                         "</form>";
         return html;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String createMessage(@RequestParam String name, @RequestParam String language){
-        if(name == null){
-            name="World";
-        }
-        String favorite = "";
-        if(language.equals("java")) {
-            favorite = "Java";
-        }else if(language.equals("javaScript")){
-            favorite = "JavaScript";
-        }else if(language.equals("python")){
-            favorite = "Python";
-        }
-        return "<p style='color: blue; text-align: center;font-size: 30px;'>" + name + favorite.length();
+    @PostMapping(value = "form")
+    @ResponseBody
+    public String namePage(@RequestParam String name, @RequestParam String firstChoice, @RequestParam String secondChoice,
+                           @RequestParam String thirdChoice){
+        String html = "<h1>" + name + "</h1>" +
+                "<ol>" +
+                "<li>" + firstChoice + "</li>" +
+                "<li>" + secondChoice + "</li>" +
+                "<li>" + thirdChoice + "</li>" +
+                "</ol>";
+        return html;
     }
+
 
 
 }
